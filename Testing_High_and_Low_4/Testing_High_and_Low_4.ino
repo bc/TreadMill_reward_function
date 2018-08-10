@@ -8,6 +8,7 @@
 
 int SamplingInterval=1000; //Change this to determine the encoder sampling interval (ms)
 float deg=0;
+String degString;
 float x_Value=0;
 bool pinState ;  //Signal which tells if the reward value needs to be colected
                   //When Low the encoer ir read and the reward sum done
@@ -21,10 +22,11 @@ void setup() {
   pinMode(11, INPUT); 
   pinMode(Led, OUTPUT); 
   
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
+  //Serial.println("Hi");
 /*deg = encoder3.read();  Serial.println(deg); */
   cum_Sum=0;
   pinState = digitalRead(12);  
@@ -46,7 +48,36 @@ void loop() {
     digitalWrite(Led, LOW);
     //Serial.println(cum_Sum);//Uncomment this to see the cumulative reward value 
                             //(It should be enough with the value to which the leg move the treadmill)
-    Serial.println(deg);
+    if (deg<0&&deg>-1000000)
+  {
+    deg=-deg;
+    degString=String(deg);
+    if (deg<10&&deg>0){degString="-00000"+degString;}
+    if (deg<100&&deg>=10){degString="-0000"+degString;}
+    if (deg<1000&&deg>=100){degString="-000"+degString;}
+    if (deg<10000&&deg>=1000){degString="-00"+degString;}
+    if (deg<100000&&deg>=10000){degString="-0"+degString;}    
+    if (deg<1000000&&deg>=100000){degString="-"+degString;}
+    for (int i=1; i<=5; i++) {
+      Serial.println(degString); 
+    }
+    deg=-deg;
+  }  
+
+if (deg>=0&&deg<1000000) 
+  {
+    degString=String(deg);
+    if (deg==0){degString="+00000"+degString;}
+    if (deg<10&&deg>0){degString="+00000"+degString;}
+    if (deg<100&&deg>=10){degString="+0000"+degString;}
+    if (deg<1000&&deg>=100){degString="+000"+degString;}
+    if (deg<10000&&deg>=1000){degString="+00"+degString;}
+    if (deg<100000&&deg>=10000){degString="+0"+degString;}    
+    if (deg<1000000&&deg>=100000){degString="+"+degString;}
+    for (int i=1; i<=5; i++) {
+      Serial.println(degString); 
+    }
+  }
     print_Flag=0;
   }
   
