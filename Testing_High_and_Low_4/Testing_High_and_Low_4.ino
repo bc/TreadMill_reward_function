@@ -1,4 +1,4 @@
-#Practizing with GitHub!! 
+//Practising with GitHub!! 
 
 #include "EncoderTM.h"
 #include <Encoder.h>
@@ -8,7 +8,7 @@
 #define Led 13  
 
 
-int SamplingInterval=1000; //Change this to determine the encoder sampling interval (ms)
+int SamplingInterval=10; //Change this to determine the encoder sampling interval (ms)
 float deg=0;
 String degString;
 float x_Value=0;
