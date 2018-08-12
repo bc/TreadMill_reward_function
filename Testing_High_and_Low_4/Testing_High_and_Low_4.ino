@@ -1,5 +1,3 @@
-//Practising with GitHub!! 
-
 #include "EncoderTM.h"
 #include <Encoder.h>
 
@@ -20,7 +18,6 @@ int print_Flag=0;  //Once the pinSate goes to HIGH the acumulated value is print
 void setup() {
 
   pinMode(12, INPUT_PULLUP); 
-//  pinMode(12, INPUT); 
   pinMode(11, INPUT); 
   pinMode(Led, OUTPUT); 
   
@@ -60,9 +57,8 @@ void loop() {
     if (deg<10000&&deg>=1000){degString="-00"+degString;}
     if (deg<100000&&deg>=10000){degString="-0"+degString;}    
     if (deg<1000000&&deg>=100000){degString="-"+degString;}
-    for (int i=1; i<=5; i++) {
-      Serial.println(degString); 
-    }
+    Serial.println(degString);
+    serial.flush()
     deg=-deg;
   }  
 
@@ -76,9 +72,8 @@ if (deg>=0&&deg<1000000)
     if (deg<10000&&deg>=1000){degString="+00"+degString;}
     if (deg<100000&&deg>=10000){degString="+0"+degString;}    
     if (deg<1000000&&deg>=100000){degString="+"+degString;}
-    for (int i=1; i<=5; i++) {
-      Serial.println(degString); 
-    }
+    Serial.println(degString); 
+    Serial.flush()
   }
     print_Flag=0;
   }
